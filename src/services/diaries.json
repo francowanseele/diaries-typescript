@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "date": "1995-01-01",
+    "weather": "rainy",
+    "visibility": "poor",
+    "comment": "Very strong storm. I was scared."
+  },
+  {
+    "id": 2,
+    "date": "1995-04-01",
+    "weather": "sunny",
+    "visibility": "good",
+    "comment": "Very nice day, I learned a lot."
+  },
+  {
+    "id": 3,
+    "date": "1995-04-15",
+    "weather": "windy",
+    "visibility": "good",
+    "comment": "I handled the plane very well. I feel really excellent."
+  },
+  {
+    "id": 4,
+    "date": "1995-05-11",
+    "weather": "cloudy",
+    "visibility": "good",
+    "comment": "The landing was very rough."
+  }
+]
