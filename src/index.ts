@@ -13,10 +13,12 @@ app.get('/ping', (_req, res) => {
 
 app.use('/api/diaries', diaryRouter)
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log('-----------------------')
   console.log('------- SERVER --------')
   console.log('-----------------------')
 
   console.log(`http://localhost:${PORT}/api/`)
 })
+
+export { app, server }

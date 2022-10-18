@@ -1,31 +1,14 @@
 import express from 'express'
-import * as diaryServices from '../services/diaryServices'
-import toNewDiaryEntry from '../utils'
+import { addDiary, deleteAllDiaries, getAllDiaries, getDiary } from '../controllers/diaries'
 
 const router = express.Router()
 
-router.get('/', (_req, res) => {
-  res.send(diaryServices.getEntriesWithoutSensitiveInfo())
-})
+router.get('/', getAllDiaries)
 
-router.get('/:id', (req, res) => {
-  const diary = diaryServices.findById(+req.params.id)
+router.get('/:id', getDiary)
 
-  return (diary != null)
-    ? res.send(diary)
-    : res.sendStatus(404)
-})
+router.post('/', addDiary)
 
-router.post('/', (req, res) => {
-  try {
-    const newDiaryEntry = toNewDiaryEntry(req.body)
-
-    const addedDiaryEntry = diaryServices.addDiary(newDiaryEntry)
-
-    res.json(addedDiaryEntry)
-  } catch (error: any) {
-    res.status(400).send(error.message)
-  }
-})
+router.delete('/', deleteAllDiaries)
 
 export default router

@@ -1,7 +1,9 @@
 import { DiaryEntry, NewDiaryEntry, NonSensitiveInfoDiaryEntry } from '../types'
 import diaryData from './diaries.json'
+import diaryDataQA from './diaries_qa.json'
 
-const diaries: DiaryEntry[] = diaryData as DiaryEntry[]
+const { NODE_ENV } = process.env
+const diaries: DiaryEntry[] = NODE_ENV === 'dev' ? diaryData as DiaryEntry[] : diaryDataQA as DiaryEntry[]
 
 export const getEntries = (): DiaryEntry[] => diaries
 
@@ -34,4 +36,10 @@ export const addDiary = (newDiaryEntry: NewDiaryEntry): DiaryEntry => {
 
   diaries.push(newDiary)
   return newDiary
+}
+
+export const deleteAllDiaries = (): DiaryEntry[] => {
+  diaries.splice(0, diaries.length)
+
+  return diaries
 }
