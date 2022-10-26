@@ -33,7 +33,7 @@ const isWeather = (param: any): boolean => {
   return Object.values(Weather).includes(param)
 }
 
-const isString = (string: string): boolean => {
+export const isString = (string: string): boolean => {
   return typeof string === 'string'
 }
 

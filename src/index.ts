@@ -1,6 +1,8 @@
 import express from 'express'
+import * as dotenv from 'dotenv'
 
 import diaryRouter from './routes/diaries'
+import userRouter from './routes/users'
 
 const app = express()
 app.use(express.json()) // middleware -> transform req.body to json
@@ -12,6 +14,9 @@ app.get('/ping', (_req, res) => {
 })
 
 app.use('/api/diaries', diaryRouter)
+app.use('/api/users', userRouter)
+
+dotenv.config()
 
 const server = app.listen(PORT, () => {
   console.log('-----------------------')

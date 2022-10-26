@@ -30,7 +30,7 @@ export const getEntriesWithoutSensitiveInfo = (): NonSensitiveInfoDiaryEntry[] =
 
 export const addDiary = (newDiaryEntry: NewDiaryEntry): DiaryEntry => {
   const newDiary = {
-    id: Math.max(...diaries.map(d => d.id)) + 1,
+    id: diaries.length > 0 ? Math.max(...diaries.map(d => d.id)) + 1 : 1,
     ...newDiaryEntry
   }
 

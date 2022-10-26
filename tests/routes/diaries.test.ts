@@ -3,10 +3,35 @@ import { app, server } from '../../src/index'
 
 const api = supertest(app)
 
+var TOKEN = ''
+
 describe('Test routes diaries', () => {
   // beforeEach(async () => {
 
   // })
+
+  beforeAll(async () => {
+    const name = 'user'
+    const lastname = 'example'
+    const email = 'user.example@gmail.com'
+    const password = '123456'
+
+    await api.post('/api/users')
+      .send({
+        name: name,
+        lastname: lastname,
+        email: email,
+        password: password
+      })
+
+    const logged = await api.post('/api/users/login')
+      .send({
+        email: email,
+        password: password
+      })
+
+    TOKEN = logged.body.token
+  })
 
   it('Diaries should to be a json file.', async () => {
     await api
@@ -28,6 +53,7 @@ describe('Test routes diaries', () => {
         weather: 'sunny',
         visibility: 'ok'
       })
+      .set('Authorization', `Bearer ${TOKEN}`)
 
     expect(newDiary.body.comment).toBe('new comment')
     const response = await api.get('/api/diaries')
@@ -36,8 +62,8 @@ describe('Test routes diaries', () => {
 
   it('Should be remove all diaries.', async () => {
     const response = await api.delete('/api/diaries')
+      .set('Authorization', `Bearer ${TOKEN}`)
       .expect(200)
-    console.log(response.body)
 
     expect(response.body).toHaveLength(0)
   })
